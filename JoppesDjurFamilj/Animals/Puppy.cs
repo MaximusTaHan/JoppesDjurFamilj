@@ -24,15 +24,20 @@ namespace JoppesDjurFamilj
             if (toy is Ball ball && hungry == true)
             {
                 HungryAnimal();
-                hungry = false;
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
             }
             else if (toy is Ball ballCheck)
             {
                 PlayWithBall(ballCheck);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
             }
             if (toy is TreatDispenserToy dispenserToy)
             {
                 PlayWithDispenser(dispenserToy);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
             }
         }
 

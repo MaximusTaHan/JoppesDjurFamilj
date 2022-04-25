@@ -4,8 +4,8 @@ using JoppesDjurFamilj.Toys;
 internal class PetOwner
 {
     private int age = 30;
-    List<Animal> animals = new();
-    List<Toy> toys = new();
+    private List<Animal> animals = new();
+    private List<Toy> toys = new();
     // pets for owner 
     Puppy puppy = new(0, 11, "Scrappy", "Great-dane");
     Dog dog = new(5, "Scooby", "Great-dane");
@@ -85,6 +85,7 @@ internal class PetOwner
         }
         if(input == "2")
         {
+            //Finds object in list of TreatDispenseToy type or default
             var dispenser = toys.OfType<TreatDispenserToy>().FirstOrDefault();
             Console.WriteLine("How many treats do you want to insert?");
             Console.Write("Treats: ");
@@ -132,12 +133,16 @@ internal class PetOwner
     {
         Console.Clear();
         Console.WriteLine($"\n\nWhat would you like to do with {pet.Name}?");
+        Console.WriteLine("Press 0 to return to Menu");
         Console.WriteLine("Press 1 to Play");
         Console.WriteLine("Press 2 to Feed");
         Console.Write("\nOption: ");
 
         var input = Console.ReadLine();
-        
+
+        if (input == "0")
+            return;
+
         while(input != "1" && input != "2")
         {
             Console.WriteLine("\nNot a valid input");
@@ -157,7 +162,7 @@ internal class PetOwner
         }
     }
     //  Prints toys and lets user choose which one to use. If the toy is broken or empty, it will not let you continue
-    // Then it will call the interact method with chosen toy
+    //  Then it will call the interact method with chosen toy
     private void play(Animal pet)
     {
         int num = 0;
@@ -166,13 +171,18 @@ internal class PetOwner
         Console.WriteLine("\n\n");
         foreach (Toy toy in toys)
         {
-            Console.WriteLine($"Toy {num} " + toy.ToString());
+            Console.WriteLine($"Toy {num}: " + toy.ToString());
             num++;
         }
 
         Console.WriteLine("\nChoose a toy");
+        Console.WriteLine("Type \"Exit\" to return to Menu");
         Console.Write("Toy number: ");
         var choosenInput = Console.ReadLine();
+
+        if (choosenInput == "Exit")
+            return;
+
         int temp;
 
         while (!int.TryParse(choosenInput, out temp) || toys[temp].Quality < 0)
@@ -180,6 +190,8 @@ internal class PetOwner
             Console.WriteLine("Not a valid toy");
             Console.WriteLine("Try again: ");
             choosenInput = Console.ReadLine();
+            if (choosenInput == "Exit")
+                return;
         }
 
         pet.Interact(toys[temp]);

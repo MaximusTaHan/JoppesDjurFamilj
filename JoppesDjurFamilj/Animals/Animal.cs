@@ -42,7 +42,7 @@ namespace JoppesDjurFamilj
         }
 
         // Sets hungry to false, can be overriden in derived classes for further extension or customisation
-        public virtual void Eat()
+        public void Eat()
         {
             hungry = false;
             Console.WriteLine($"{name} chows down food vigorously... \"Chomp chomp chomp\"");

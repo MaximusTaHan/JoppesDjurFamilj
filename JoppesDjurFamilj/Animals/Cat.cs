@@ -31,10 +31,14 @@ namespace JoppesDjurFamilj
             else if(toy is Ball ballCheck)
             {
                 PlayWithBall(ballCheck);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
             }
             if (toy is TreatDispenserToy dispenserToy)
             {
                 PlayWithDispenser(dispenserToy);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey(true);
             }
         }
         // Defines behaviour for dispenser toy depending on how many treats it holds
