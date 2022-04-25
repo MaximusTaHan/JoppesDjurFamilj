@@ -14,6 +14,7 @@ internal class PetOwner
     //toys for owner
     Ball ball = new("Red", 100);
     TreatDispenserToy treatDispenser = new(100);
+
     internal void Menu()
     {
         AddPets();
