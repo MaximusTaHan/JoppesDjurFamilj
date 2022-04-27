@@ -171,7 +171,7 @@ internal class PetOwner
 
         if (input == "1")
         {
-            play(pet);
+            Play(pet);
         }
         if(input == "2")
         {
@@ -187,7 +187,7 @@ internal class PetOwner
     /// If the chosen toys quality value is below 0 it will prevent using that toy.
     /// </summary>
     /// <param name="pet">The animal from animals list</param>
-    private void play(Animal pet)
+    private void Play(Animal pet)
     {
         int num = 0;
 
