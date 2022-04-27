@@ -9,7 +9,12 @@ namespace JoppesDjurFamilj
 {
     internal class Dog : Animal
     {
-        // Constructor that sets name, age and breed. All dogs love Scooby-snacks so that field is set on initialization
+        /// <summary>
+        /// Constructor that sets name, age and breed. All dogs love Scooby-snacks so that field is set on initialization
+        /// </summary>
+        /// <param name="setAge">Int age of Dog</param>
+        /// <param name="setName">String name of Dog</param>
+        /// <param name="setBreed">String breed of Dog</param>
         public Dog(int setAge, string setName, string setBreed)
         {
             name = setName;

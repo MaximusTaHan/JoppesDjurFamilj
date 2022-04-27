@@ -11,7 +11,11 @@ namespace JoppesDjurFamilj.Toys
         public TreatDispenserToy(int treats) : base (treats)
         {
         }
-        // Removes the number of treats eaten, if treats would be less than 0 it only returns whats left in the toy
+        /// <summary>
+        /// Removes the number of treats eaten, if treats would be less than 0 it only returns whats left in the toy
+        /// </summary>
+        /// <param name="number">Number of treats to remove</param>
+        /// <returns>Number of treats left</returns>
         public int RemoveTreats(int number)
         {
             int check = quality - number;
@@ -27,12 +31,19 @@ namespace JoppesDjurFamilj.Toys
         }
 
         //Fills dispenser with specified amount of treats
+        /// <summary>
+        /// Refills the dispenser by adding to the quality field
+        /// </summary>
+        /// <param name="treats">Amount to add to quality field</param>
         public void Refill(int treats)
         {
             quality += treats;
             ToString();
         }
-
+        /// <summary>
+        /// Prints string of toy with fields values
+        /// </summary>
+        /// <returns>The various fields as a formatted string: "Treat dispenser. Treats remaining: {quality}"</returns>
         public override string ToString()
         {
             return $"Treat dispenser. Treats remaining: {quality}";

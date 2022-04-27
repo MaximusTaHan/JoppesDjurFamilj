@@ -18,30 +18,13 @@ namespace JoppesDjurFamilj
             this.name = name;
             this.breed = breed;
         }
-
-        public override void Interact(Toy toy)
-        {
-            if (toy is Ball ball && hungry == true)
-            {
-                HungryAnimal();
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-            }
-            else if (toy is Ball ballCheck)
-            {
-                PlayWithBall(ballCheck);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-            }
-            if (toy is TreatDispenserToy dispenserToy)
-            {
-                PlayWithDispenser(dispenserToy);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-            }
-        }
-
-        private void PlayWithDispenser(TreatDispenserToy dispenserToy)
+        /// <summary>
+        /// Defines behaviour for playing with dispenser. Calling RemoveTreats on the dispenser changes its quality field. 
+        /// Will set pets hungry value to false.
+        /// If the treats in the dispenser would run out it would only consume the available treats.
+        /// </summary>
+        /// <param name="dispenserToy">Specific toy from toys list</param>
+        public override void PlayWithDispenser(TreatDispenserToy dispenserToy)
         {
             hungry = false;
             if (dispenserToy.Quality < 0)
@@ -54,8 +37,13 @@ namespace JoppesDjurFamilj
             dispenserToy.RemoveTreats(10);
         }
 
-        //Defines behaviour for playing with ball. Calling LowerQuality on the ball
-        private void PlayWithBall(Ball ball)
+        /// <summary>
+        /// Defines behaviour for playing with ball. Calling LowerQuality on the ball changes its quality field. 
+        /// Will set pets hungry value to true.
+        /// If the balls quality would be lower than 0 another message is displayed.
+        /// </summary>
+        /// <param name="ball">Ball from toys list</param>
+        public override void PlayWithBall(Ball ball)
         {
             hungry = true;
             if (ball.Quality < 0)
@@ -67,6 +55,10 @@ namespace JoppesDjurFamilj
             Console.WriteLine($"{name} tumbles around with the ball, it's hard to tell which one is doing more tumbles");
             ball.LowerQuality(10);
         }
+        /// <summary>
+        /// Prints string of puppy with fields values. This iplementation prints Age as a months specific value
+        /// </summary>
+        /// <returns>The various fields as a formatted string: "Name: {name}. Age: {months} (months). Favorite food: {faveFood}. Breed: {breed}. Hungry: {hungry}"</returns>
         public override string ToString()
         {
             return $"Name: {name}. Age: {months} (months). Favorite food: {faveFood}. Breed: {breed}. Hungry: {hungry}";

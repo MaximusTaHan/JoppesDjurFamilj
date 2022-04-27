@@ -6,15 +6,19 @@ internal class PetOwner
     private int age = 30;
     private List<Animal> animals = new();
     private List<Toy> toys = new();
-    // pets for owner 
+    // Pets for owner 
     Puppy puppy = new(0, 11, "Scrappy", "Great-dane");
     Dog dog = new(5, "Scooby", "Great-dane");
     Cat cat = new(6, "Garfield", "Persian", "Lasagna");
 
-    //toys for owner
+    //Toys for owner
     Ball ball = new("Red", 100);
     TreatDispenserToy treatDispenser = new(100);
 
+    /// <summary>
+    /// Prints the main menu options for the App and validates the user input against a Switch/Case for where to go.
+    /// Also adds the preset pets/toys to the animals/toys list. 
+    /// </summary>
     internal void Menu()
     {
         AddPets();
@@ -60,6 +64,11 @@ internal class PetOwner
         }
     }
 
+    /// <summary>
+    /// Prints the options for toys. Validates user input against toy options.
+    /// If 1 is chosen the method will prompt the user for a color (The input is not validated).
+    /// If 2 is chosen the method will prompt the user for an amount to refill the dispenser.
+    /// </summary>
     private void ToyOptions()
     {
         Console.WriteLine("What would you like to do?");
@@ -86,12 +95,15 @@ internal class PetOwner
         }
         if(input == "2")
         {
+            int amount;
             //Finds object in list of TreatDispenseToy type or default
             var dispenser = toys.OfType<TreatDispenserToy>().FirstOrDefault();
+
             Console.WriteLine("How many treats do you want to insert?");
             Console.Write("Treats: ");
+
             var treatInput = Console.ReadLine();
-            int amount;
+
             while(!int.TryParse(treatInput, out amount))
             {
                 Console.WriteLine("Please input a valid number");
@@ -103,7 +115,10 @@ internal class PetOwner
         }
     }
 
-    //picks out the animal from the list of animals by finding the name getter that matches the input
+    /// <summary>
+    /// Picks out the animal from the list of animals by finding the Name getter that matches the user input.
+    /// Then it calls the PetOptions method with the chosen Pet as argument.
+    /// </summary>
     private void InitializeInteract()
     {
         Console.Clear();
@@ -129,7 +144,10 @@ internal class PetOwner
         PetOptions(pet);
     }
 
-    //Prints options for interactions and validates the user input
+    /// <summary>
+    /// Prints options for interactions and validates the user input
+    /// </summary>
+    /// <param name="pet">The animal from animals list</param>
     private void PetOptions(Animal pet)
     {
         Console.Clear();
@@ -162,8 +180,13 @@ internal class PetOwner
             Console.ReadKey(true);
         }
     }
-    //  Prints toys and lets user choose which one to use. If the toy is broken or empty, it will not let you continue
-    //  Then it will call the interact method with chosen toy
+
+    /// <summary>
+    /// Prints toys and lets user choose which one to use. If the toy is broken or empty, it will not let you continue
+    /// Then it will call the interact method with chosen toy.
+    /// If the chosen toys quality value is below 0 it will prevent using that toy.
+    /// </summary>
+    /// <param name="pet">The animal from animals list</param>
     private void play(Animal pet)
     {
         int num = 0;
@@ -186,7 +209,7 @@ internal class PetOwner
 
         int temp;
 
-        while (!int.TryParse(choosenInput, out temp) || toys[temp].Quality < 0)
+        while (!int.TryParse(choosenInput, out temp) || toys[temp].Quality <= 0)
         {
             Console.WriteLine("Not a valid toy");
             Console.WriteLine("Try again: ");
@@ -198,7 +221,9 @@ internal class PetOwner
         pet.Interact(toys[temp]);
     }
 
-    // View pets in list and wait for key press
+    /// <summary>
+    /// Prints toys in list and waits for key press
+    /// </summary>
     private void ViewToys()
     {
         Console.WriteLine("\n\n");
@@ -209,7 +234,9 @@ internal class PetOwner
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
     }
-    // View pets in list and wait for key press
+    /// <summary>
+    /// Prints pets in list and waits for key press
+    /// </summary>
     private void ViewAnimals()
     {
         Console.WriteLine("\n\n");
@@ -220,14 +247,18 @@ internal class PetOwner
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey(true);
     }
-    // Adds toys to list
+    /// <summary>
+    /// Adds preset Toys to toys list
+    /// </summary>
     private void AddToys()
     {
         toys.Add(ball);
         toys.Add(treatDispenser);
     }
 
-    //Adds animals to list 
+    /// <summary>
+    /// Adds preset Animals to animals list
+    /// </summary>
     private void AddPets()
     {
         animals.Add(dog);

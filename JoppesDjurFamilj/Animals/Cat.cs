@@ -18,7 +18,13 @@ namespace JoppesDjurFamilj
             faveFood = favoriteFood;
         }
 
-        // Checks if toy is ball or dispenser, if toy is a ball and the Cat is hungry it will go out to hunt. If its a treat dispenser it will "play" with it instead of hunting
+        /// <summary>
+        /// Checks if toy is ball or dispenser, if toy is a ball and the Cat is hungry it will go out to hunt. If its a treat dispenser it will "play" with it instead of hunting
+        /// If toy is a Ball and the pet is hungry it will call HungryAnimal, this prevents playing with a ball if pet is hungry.
+        /// If toy is Ball it will call PlayWithBall
+        /// If toy is a TreatDispenserToy it will call PlayWithDispenser
+        /// </summary>
+        /// <param name="toy">Specific toy from toys list</param>
         public override void Interact(Toy toy)
         {
             if (toy is Ball ball && hungry == true)
@@ -41,8 +47,13 @@ namespace JoppesDjurFamilj
                 Console.ReadKey(true);
             }
         }
-        // Defines behaviour for dispenser toy depending on how many treats it holds
-        private void PlayWithDispenser(TreatDispenserToy dispenserToy)
+        /// <summary>
+        /// Defines behaviour for playing with dispenser. Calling RemoveTreats on the dispenser changes its quality field. 
+        /// Will set pets hungry value to false.
+        /// If the treats in the dispenser would run out it would only consume the available treats.
+        /// </summary>
+        /// <param name="dispenserToy">Specific toy from toys list</param>
+        public override void PlayWithDispenser(TreatDispenserToy dispenserToy)
         {
             hungry = false;
             if (dispenserToy.Quality < 0)
@@ -63,8 +74,13 @@ namespace JoppesDjurFamilj
             }
         }
 
-        //Defines behaviour for playing with ball. Calling LowerQuality on the ball
-        private void PlayWithBall(Ball ball)
+        /// <summary>
+        /// Defines behaviour for playing with ball. Calling LowerQuality on the ball changes its quality field. 
+        /// Will set pets hungry value to true.
+        /// If the balls quality would be lower than 0 another message is displayed.
+        /// </summary>
+        /// <param name="ball">Ball from toys list</param>
+        public override void PlayWithBall(Ball ball)
         {
             hungry = true;
             if (ball.Quality < 0)

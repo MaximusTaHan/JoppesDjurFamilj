@@ -15,12 +15,20 @@ namespace JoppesDjurFamilj.Toys
             color = setColor;
         }
 
-        //Takes in the damage done to the ball and subtracts it from quality. Returns the remaining quality of the ball to check if its still usable
+        /// <summary>
+        /// Takes in the damage done to the ball and subtracts it from quality. Returns the remaining quality of the ball to check if its still usable
+        /// </summary>
+        /// <param name="damage">Amount of damage to subtract from quality</param>
+        /// <returns>Quality value of ball</returns>
         public int LowerQuality(int damage)
         {
             return quality -= damage;
         }
         //For checking toys
+        /// <summary>
+        /// Prints string of toy with fields values
+        /// </summary>
+        /// <returns>The various fields as a formatted string: "Ball. Color: {color}. Quality: {quality}"</returns>
         public override string ToString()
         {
             return $"Ball. Color: {color}. Quality: {quality}";

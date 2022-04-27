@@ -18,7 +18,13 @@ namespace JoppesDjurFamilj
         //Read only getter for name validation
         public string Name { get { return name; } }
 
-        //Abstract class should never be instantiated, method implementation is defined in derived classes
+        /// <summary>
+        /// Base implementation of Interact method. Checks the parameter for its type and calls the apropriate method.
+        /// If toy is a Ball and the pet is hungry it will call HungryAnimal, this prevents playing with a ball if pet is hungry.
+        /// If toy is Ball it will call PlayWithBall
+        /// If toy is a TreatDispenserToy it will call PlayWithDispenser
+        /// </summary>
+        /// <param name="toy">Toy from toys list</param>
         public virtual void Interact(Toy toy)
         {
             if (toy is Ball ball && hungry == true)
@@ -42,12 +48,21 @@ namespace JoppesDjurFamilj
         }
 
         // Sets hungry to false, can be overriden in derived classes for further extension or customisation
+        /// <summary>
+        /// Method call that sets pets hungry value to false.
+        /// </summary>
         public void Eat()
         {
             hungry = false;
             Console.WriteLine($"{name} chows down food vigorously... \"Chomp chomp chomp\"");
         }
-        private void PlayWithDispenser(TreatDispenserToy dispenserToy)
+        /// <summary>
+        /// Defines behaviour for playing with dispenser. Calling RemoveTreats on the dispenser changes its quality field. 
+        /// Will set pets hungry value to false.
+        /// If the treats in the dispenser would run out it would only consume the available treats.
+        /// </summary>
+        /// <param name="dispenserToy">Specific toy from toys list</param>
+        public virtual void PlayWithDispenser(TreatDispenserToy dispenserToy)
         {
             hungry = false;
             if (dispenserToy.Quality < 0)
@@ -60,8 +75,13 @@ namespace JoppesDjurFamilj
             dispenserToy.RemoveTreats(25);
         }
 
-        //Defines behaviour for playing with ball. Calling LowerQuality on the ball
-        private void PlayWithBall(Ball ball)
+        /// <summary>
+        /// Defines behaviour for playing with ball. Calling LowerQuality on the ball changes its quality field. 
+        /// Will set pets hungry value to true.
+        /// If the balls quality would be lower than 0 another message is displayed.
+        /// </summary>
+        /// <param name="ball">Specific toy from toys list</param>
+        public virtual void PlayWithBall(Ball ball)
         {
             hungry = true;
             if (ball.Quality < 0)
@@ -73,12 +93,17 @@ namespace JoppesDjurFamilj
             Console.WriteLine($"{name} tosses and flails while the ball goes flying through the air");
             ball.LowerQuality(30);
         }
-        // Defines behaviour for animal when it is hungry, can be overriden to creat further customisation when interacting with derived classes
+        /// <summary>
+        /// Defines behaviour for animal when it is hungry, can be overriden to creat further customisation when interacting with derived classes
+        /// </summary>
         public void HungryAnimal()
         {
             Console.WriteLine($"{name} is too hungry to play, maybe it's time for dinner");
         }
-        //If the base implementation is called from the derived classes it will print the fields
+        /// <summary>
+        /// If the base implementation is called from the derived classes it will print the fields
+        /// </summary>
+        /// <returns>The various fields as a formatted string: "Name: {name}. Age: {age}. Favorite food: {faveFood}. Breed: {breed}. Hungry: {hungry}"</returns>
         public override string ToString()
         {
             return $"Name: {name}. Age: {age}. Favorite food: {faveFood}. Breed: {breed}. Hungry: {hungry}";
