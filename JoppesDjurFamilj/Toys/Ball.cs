@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JoppesDjurFamilj.Toys
 {
-    internal class Ball : Toy
+    public class Ball : Toy
     {
         private string color;
 

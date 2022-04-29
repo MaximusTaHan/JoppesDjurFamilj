@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JoppesDjurFamilj.Toys
 {
-    internal class TreatDispenserToy : Toy
+    public class TreatDispenserToy : Toy
     {
         public TreatDispenserToy(int treats) : base (treats)
         {

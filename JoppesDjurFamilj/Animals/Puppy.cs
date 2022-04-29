@@ -24,17 +24,16 @@ namespace JoppesDjurFamilj
         /// If the treats in the dispenser would run out it would only consume the available treats.
         /// </summary>
         /// <param name="dispenserToy">Specific toy from toys list</param>
-        public override void PlayWithDispenser(TreatDispenserToy dispenserToy)
+        public override string PlayWithDispenser(TreatDispenserToy dispenserToy)
         {
             hungry = false;
             if (dispenserToy.Quality < 0)
             {
-                Console.WriteLine($"{name} paws at the ball untill the last treat falls out. The toy seems to be empty");
                 dispenserToy.RemoveTreats(10);
-                return;
+                return $"{name} paws at the ball untill the last treat falls out. The toy seems to be empty";
             }
-            Console.WriteLine($"{name} paws the treat ball around the floor but gets bored quickly. 10 treats was the limit before boredom sets in");
             dispenserToy.RemoveTreats(10);
+            return $"{name} paws the treat ball around the floor but gets bored quickly. 10 treats was the limit before boredom sets in";
         }
 
         /// <summary>
@@ -43,17 +42,16 @@ namespace JoppesDjurFamilj
         /// If the balls quality would be lower than 0 another message is displayed.
         /// </summary>
         /// <param name="ball">Ball from toys list</param>
-        public override void PlayWithBall(Ball ball)
+        public override string PlayWithBall(Ball ball)
         {
             hungry = true;
             if (ball.Quality < 0)
             {
                 ball.LowerQuality(10);
-                Console.WriteLine($"{name} knaws the ball to pieces... Puppy teeth has to be itchy. Should probably throw this one in the trash");
-                return;
+                return $"{name} knaws the ball to pieces... Puppy teeth has to be itchy. Should probably throw this one in the trash";
             }
-            Console.WriteLine($"{name} tumbles around with the ball, it's hard to tell which one is doing more tumbles");
             ball.LowerQuality(10);
+            return $"{name} tumbles around with the ball, it's hard to tell which one is doing more tumbles";
         }
         /// <summary>
         /// Prints string of puppy with fields values. This iplementation prints Age as a months specific value

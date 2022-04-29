@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JoppesDjurFamilj.Toys
 {
-    internal abstract class Toy
+    public abstract class Toy
     {
         protected int quality;
 

@@ -7,7 +7,10 @@ using JoppesDjurFamilj.Toys;
 
 namespace JoppesDjurFamilj
 {
-    internal abstract class Animal
+    /// <summary>
+    /// Animal class Defines base implementation of Animal. Is Abstract and should never be instantiated.
+    /// </summary>
+    public abstract class Animal
     {
         protected int age;
         protected string name;
@@ -25,36 +28,31 @@ namespace JoppesDjurFamilj
         /// If toy is a TreatDispenserToy it will call PlayWithDispenser
         /// </summary>
         /// <param name="toy">Toy from toys list</param>
-        public virtual void Interact(Toy toy)
+        public virtual string Interact(Toy toy)
         {
             if (toy is Ball ball && hungry == true)
             {
-                HungryAnimal();
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
+                return HungryAnimal();
             }
             else if (toy is Ball ballCheck)
             {
-                PlayWithBall(ballCheck);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
+                return PlayWithBall(ballCheck);
             }
             if (toy is TreatDispenserToy dispenserToy)
             {
-                PlayWithDispenser(dispenserToy);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
+                return PlayWithDispenser(dispenserToy);
             }
+            return null;
         }
 
         // Sets hungry to false, can be overriden in derived classes for further extension or customisation
         /// <summary>
         /// Method call that sets pets hungry value to false.
         /// </summary>
-        public void Eat()
+        public string Eat()
         {
             hungry = false;
-            Console.WriteLine($"{name} chows down food vigorously... \"Chomp chomp chomp\"");
+            return $"{name} chows down food vigorously... \"Chomp chomp chomp\"";
         }
         /// <summary>
         /// Defines behaviour for playing with dispenser. Calling RemoveTreats on the dispenser changes its quality field. 
@@ -62,17 +60,16 @@ namespace JoppesDjurFamilj
         /// If the treats in the dispenser would run out it would only consume the available treats.
         /// </summary>
         /// <param name="dispenserToy">Specific toy from toys list</param>
-        public virtual void PlayWithDispenser(TreatDispenserToy dispenserToy)
+        public virtual string PlayWithDispenser(TreatDispenserToy dispenserToy)
         {
             hungry = false;
             if (dispenserToy.Quality < 0)
             {
-                Console.WriteLine($"{name} paws at the ball untill the last treat falls out. The toy seems to be empty");
                 dispenserToy.RemoveTreats(25);
-                return;
+                return $"{name} paws at the ball untill the last treat falls out. The toy seems to be empty";
             }
-            Console.WriteLine($"{name} paws the treat ball around the floor untill it isnt as interesting anymore. 25 treats have been devoured");
             dispenserToy.RemoveTreats(25);
+            return $"{name} paws the treat ball around the floor untill it isnt as interesting anymore. 25 treats have been devoured";
         }
 
         /// <summary>
@@ -81,24 +78,23 @@ namespace JoppesDjurFamilj
         /// If the balls quality would be lower than 0 another message is displayed.
         /// </summary>
         /// <param name="ball">Specific toy from toys list</param>
-        public virtual void PlayWithBall(Ball ball)
+        public virtual string PlayWithBall(Ball ball)
         {
             hungry = true;
             if (ball.Quality < 0)
             {
                 ball.LowerQuality(30);
-                Console.WriteLine($"{name} chews ball into crumbles... What a mess. Should probably throw this one in the trash");
-                return;
+                return $"{name} chews ball into crumbles... What a mess. Should probably throw this one in the trash";
             }
-            Console.WriteLine($"{name} tosses and flails while the ball goes flying through the air");
             ball.LowerQuality(30);
+            return $"{name} tosses and flails while the ball goes flying through the air";
         }
         /// <summary>
         /// Defines behaviour for animal when it is hungry, can be overriden to creat further customisation when interacting with derived classes
         /// </summary>
-        public void HungryAnimal()
+        public string HungryAnimal()
         {
-            Console.WriteLine($"{name} is too hungry to play, maybe it's time for dinner");
+            return $"{name} is too hungry to play, maybe it's time for dinner";
         }
         /// <summary>
         /// If the base implementation is called from the derived classes it will print the fields

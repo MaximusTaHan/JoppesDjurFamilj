@@ -25,27 +25,22 @@ namespace JoppesDjurFamilj
         /// If toy is a TreatDispenserToy it will call PlayWithDispenser
         /// </summary>
         /// <param name="toy">Specific toy from toys list</param>
-        public override void Interact(Toy toy)
+        public override string Interact(Toy toy)
         {
             if (toy is Ball ball && hungry == true)
             {
-                Console.WriteLine($"{name} seems dissintrested in playing and waddeles out the cat door. Probably to go hunt for a snack");
                 hungry = false;
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
+                return $"{name} seems dissintrested in playing and waddeles out the cat door. Probably to go hunt for a snack";
             }
             else if(toy is Ball ballCheck)
             {
-                PlayWithBall(ballCheck);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
+                return PlayWithBall(ballCheck);
             }
             if (toy is TreatDispenserToy dispenserToy)
             {
-                PlayWithDispenser(dispenserToy);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
+                return PlayWithDispenser(dispenserToy);
             }
+            return "";
         }
         /// <summary>
         /// Defines behaviour for playing with dispenser. Calling RemoveTreats on the dispenser changes its quality field. 
@@ -53,25 +48,20 @@ namespace JoppesDjurFamilj
         /// If the treats in the dispenser would run out it would only consume the available treats.
         /// </summary>
         /// <param name="dispenserToy">Specific toy from toys list</param>
-        public override void PlayWithDispenser(TreatDispenserToy dispenserToy)
+        public override string PlayWithDispenser(TreatDispenserToy dispenserToy)
         {
             hungry = false;
             if (dispenserToy.Quality < 0)
             {
-                Console.WriteLine($"{name} reaches inside and scoops out the few Treats left. The toy seems to be empty");
                 dispenserToy.RemoveTreats(15);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-                return;
+                return $"{name} reaches inside and scoops out the few Treats left. The toy seems to be empty";
             }
             if (dispenserToy.Quality > 0)
             {
-                Console.WriteLine($"{name} intermittently swats the treat ball around untill pieces of treats fall out. About 15 treats have been crunched up");
                 dispenserToy.RemoveTreats(15);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-                return;
+                return $"{name} intermittently swats the treat ball around untill pieces of treats fall out. About 15 treats have been crunched up";
             }
+            return "";
         }
 
         /// <summary>
@@ -80,21 +70,16 @@ namespace JoppesDjurFamilj
         /// If the balls quality would be lower than 0 another message is displayed.
         /// </summary>
         /// <param name="ball">Ball from toys list</param>
-        public override void PlayWithBall(Ball ball)
+        public override string PlayWithBall(Ball ball)
         {
             hungry = true;
             if (ball.Quality < 0)
             {
                 ball.LowerQuality(10);
-                Console.WriteLine($"{name} holds the ball and kicks it into pieces... Like cats do. Should probably throw this one in the trash");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey(true);
-                return;
+                return $"{name} holds the ball and kicks it into pieces... Like cats do. Should probably throw this one in the trash";
             }
-            Console.WriteLine($"{name} tosses and flails while the ball goes flying through the air");
             ball.LowerQuality(10);
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey(true);
+            return $"{name} tosses and flails while the ball goes flying through the air";
         }
 
         public override string ToString()
